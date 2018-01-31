@@ -24,7 +24,15 @@ class App extends React.Component {
             .then(seriesListDepuisFichier => {
                 this.setState({seriesList: seriesListDepuisFichier});
 
+            })
+
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                /*alert("falcon");*/
             });
+
         fetch('seriesEpisodesList.json',{})
             .then(response => response.json())
             .then(seriesEpisodesListDepuisFichier => {
@@ -33,27 +41,32 @@ class App extends React.Component {
             })
             .catch(function (error) {
                 console.log(error);
-            })
-            .then(function () {
-                alert("j'ai fait ce que j'ai pu");
             });
+
 
     }
 
     render() {
         return (
             <div>
-                <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
                 <ul>
-                    {this.state.seriesList.length ?
-                        this.state.seriesList.map(item => <li key={item.id}>{item.seriesName}</li>)
-                        : <li>Loading...</li>
-                    }
-                    {this.state.seriesEpisodesList.length ?
-                        this.state.seriesEpisodesList.map(item => <li key={item.serie_id}>{item.episodeName}</li>)
+                    {this.state.value !== "" ?
+                        this.state.seriesList.filter(
+                            a => a.seriesName.toLowerCase().trim().indexOf(this.state.value) > -1
+                        ).map(item =>
+                            <li key={item.id}>{item.seriesName}
+                                <ul>
+                                    {
+                                        this.state.seriesEpisodesList.filter(
+                                            b => b.serie_id == item.id
+                                        ).map(episode => episode.episodes_list.filter(
+                                            c => c.episodeName
+                                            ).map(name => <li>{name.episodeName}</li>)
+                                        )
+                                    }
+                                </ul>
+                            </li>)
                         : <li>Loading...</li>
                     }
                 </ul>
