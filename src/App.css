@@ -21,8 +21,29 @@
 .App-intro {
   font-size: large;
 }
+body{
+  background: cadetblue;
+}
+
+.title{
+  text-align: center;
+}
+
+.serie-name{
+  color: blue;
+}
+
+.episode-name{
+  font-size: 13px;
+}
+
+.input-caca{
+  position: absolute;
+  left: 45%;
+}
+
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
+  from { transform: perspective(2px); }
   to { transform: rotate(360deg); }
 }
