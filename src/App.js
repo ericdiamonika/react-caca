@@ -57,7 +57,7 @@ class App extends React.Component {
                 <h1 className="title">REACT CACA</h1>
                 <input className="input-caca" placeholder={"Type something"} type={"text"} value={this.state.value} onChange={this.handleChange} />
                 <ul>
-                    {this.state.value !== "" && (this.state.value.length > 2) ?
+                    {this.state.value !== "" && (this.state.value.length > 1) ?
                         this.state.seriesList.filter(
 
                             /*The trim() method removes whitespace from both ends of a string. Whitespace
